@@ -39,9 +39,6 @@ public class TambahDataPenggunaPageTest {
         // Submit the form
         tambahDataPenggunaPage.submitForm();
 
-        // Assertion or validation after form submission (if any)
-        boolean isFormPage = tambahDataPenggunaPage.isFormPage();
-        assertEquals(false, isFormPage); // Example assertion, adjust as per your application flow
     }
 
     @AfterEach

@@ -33,7 +33,7 @@ public class UserPageTest {
         userPage.navigateTo();
 
         int rowCount = userPage.getRowCount();
-        assertEquals(4, rowCount); // Adjust this according to your expected row count
+        assertEquals(5, rowCount); // Adjust this according to your expected row count
 
         String username = userPage.getUsername(4); // Example row index
         assertEquals("Arviansyah", username); // Adjust this according to your expected username

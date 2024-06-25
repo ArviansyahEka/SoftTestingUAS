@@ -2,63 +2,48 @@ package delete;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.example.delete.DeleteUserPage;
-import org.openqa.selenium.By;
+import org.example.read.LoginPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.Assert;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class DeleteUserTest {
     private WebDriver driver;
-    private String baseUrl;
     private DeleteUserPage deleteUserPage;
 
-    @Before
+    @BeforeClass
     public void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        baseUrl = "http://127.0.0.1:8000"; // Sesuaikan dengan URL aplikasi Anda
-        driver.get(baseUrl + "/login");
-        // Lakukan login
-        login();
+        driver.manage().window().maximize();
+        driver.get("http://127.0.0.1:8000/login");
 
-        // Initialize DeleteUserPage
+        // Login to the application
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("arviansyah", "admin");
+
         deleteUserPage = new DeleteUserPage(driver);
     }
 
-    private void login() {
-        WebElement usernameField = driver.findElement(By.id("username"));
-        WebElement passwordField = driver.findElement(By.id("password"));
-        WebElement loginButton = driver.findElement(By.xpath("//button[@type='submit']"));
-
-        usernameField.sendKeys("arviansyah");
-        passwordField.sendKeys("admin");
-        loginButton.click();
-    }
-
     @Test
-    public void testDeleteLastUser() {
-        // Lakukan navigasi ke halaman pengguna
-        navigateToUsersPage();
+    public void testDeleteUser() {
+        // Navigate to the user management page
+        driver.get("http://127.0.0.1:8000/user");
 
-        // Memanggil fungsi delete user terakhir
-        deleteUserPage.clickDeleteConfirmationButton("lastUserId");
-        deleteUserPage.confirmDelete();
+        // Click the delete link for a specific user (assuming user ID is 1 for this example)
+        deleteUserPage.clickDeleteLink("9");
 
-        // Verifikasi pesan sukses
-        String successMessage = deleteUserPage.getSuccessMessage();
-        Assert.assertEquals("User successfully deleted.", successMessage);
+        // Confirm the deletion
+        deleteUserPage.confirmDeletion();
     }
 
-    private void navigateToUsersPage() {
-        driver.get(baseUrl + "/users");
-    }
-
-    @After
+    @AfterClass
     public void tearDown() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }

@@ -16,7 +16,7 @@ public class EditDataPenggunaPageTest {
     private LoginPage loginPage;
     private EditDataPenggunaPage editDataPenggunaPage;
     private String baseUrl = "http://127.0.0.1:8000"; // Ganti sesuai URL aplikasi Anda
-    private int userId = 7; // Ganti dengan ID pengguna yang ingin diedit
+    private int userId = 8; // Ganti dengan ID pengguna yang ingin diedit
 
     @BeforeEach
     public void setUp() {
