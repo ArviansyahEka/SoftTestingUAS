@@ -34,7 +34,7 @@ public class DeleteUserTest {
         driver.get("http://127.0.0.1:8000/user");
 
         // Click the delete link for a specific user (assuming user ID is 1 for this example)
-        deleteUserPage.clickDeleteLink("1");
+        deleteUserPage.clickDeleteLink("");
 
         // Confirm the deletion
         deleteUserPage.confirmDeletion();

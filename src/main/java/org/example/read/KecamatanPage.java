@@ -5,8 +5,6 @@ import org.openqa.selenium.WebDriver;
 
 public class KecamatanPage {
     private WebDriver driver;
-    private By tambahBaruButton = By.xpath("//a[contains(text(), '+ Buat Baru')]");
-    private By table = By.id("example");
 
     public KecamatanPage(WebDriver driver) {
         this.driver = driver;
@@ -17,31 +15,26 @@ public class KecamatanPage {
     }
 
     public int getRowCount() {
-        return driver.findElements(By.xpath("//table[@id='example']//tbody//tr")).size();
+        return driver.findElements(By.cssSelector("table#example tbody tr")).size();
     }
 
-    public String getKodePropinsi(int row) {
-        String xpath = String.format("//table[@id='example']//tbody//tr[%d]/td[2]", row);
-        return driver.findElement(By.xpath(xpath)).getText();
+    public String getKodePropinsi(int rowIndex) {
+        return driver.findElement(By.cssSelector("table#example tbody tr:nth-child(" + rowIndex + ") td:nth-child(1)")).getText();
     }
 
-    public String getKodeDati2(int row) {
-        String xpath = String.format("//table[@id='example']//tbody//tr[%d]/td[3]", row);
-        return driver.findElement(By.xpath(xpath)).getText();
+    public String getKodeDati2(int rowIndex) {
+        return driver.findElement(By.cssSelector("table#example tbody tr:nth-child(" + rowIndex + ") td:nth-child(2)")).getText();
     }
 
-    public String getKodeKecamatan(int row) {
-        String xpath = String.format("//table[@id='example']//tbody//tr[%d]/td[4]", row);
-        return driver.findElement(By.xpath(xpath)).getText();
+    public String getKodeKecamatan(int rowIndex) {
+        return driver.findElement(By.cssSelector("table#example tbody tr:nth-child(" + rowIndex + ") td:nth-child(3)")).getText();
     }
 
-    public String getNamaKecamatan(int row) {
-        String xpath = String.format("//table[@id='example']//tbody//tr[%d]/td[5]", row);
-        return driver.findElement(By.xpath(xpath)).getText();
+    public String getNamaKecamatan(int rowIndex) {
+        return driver.findElement(By.cssSelector("table#example tbody tr:nth-child(" + rowIndex + ") td:nth-child(4)")).getText();
     }
 
-    public void clickLihatDetail(int row) {
-        String xpath = String.format("//table[@id='example']//tbody//tr[%d]//a[contains(text(), 'Lihat detail')]", row);
-        driver.findElement(By.xpath(xpath)).click();
+    public void clickLihatDetail(int rowIndex) {
+        driver.findElement(By.cssSelector("table#example tbody tr:nth-child(" + rowIndex + ") td:nth-child(5) a")).click();
     }
 }
